@@ -62,6 +62,12 @@ export class FlowChart {
       if (el.options && el.options.label) {
         elData.label = el.options.label
       }
+
+	  // @nishantn -> code to support shape option which will give support for shapes{'rect' ,'circle', 'ellipse', 'diamond'}
+	  if (el.options && el.options.shape) {
+		  elData.shape = el.options.shape;
+	  }
+
       g.setNode(el.id, elData)
       const node = g.node(el.id)
 
@@ -99,7 +105,12 @@ export class FlowChart {
 
         const d3Node = select(this)
 
-        // now loop all listeners
+		// @nishantn-> add image element to support plus icon with all shapes(nodes)
+		// x is -8 because we have kept the image width as 16 so center will be placed at 0
+		let yCord = (this.getBBox() && this.getBBox().y)? this.getBBox().y/2 : 10
+		d3Node.append('image').attr('x', -8).attr('y', -yCord).attr('xlink:href', 'http://worbix.contata.co.in/img/arrow-prev.png');
+
+		// now loop all listeners
         for (const listener of el.listeners) {
           d3Node.on(listener.event, listener.callback)
         }
