@@ -4,13 +4,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Patcher56/vue-flowy.git"
+    "url": "https://github.com/nishantn1992/vue-flowy.git"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:ts": "tsc -p tsconfig-lib.json",
     "build:vue": "vue-cli-service build --target lib --name VueFlowy src/main.ts",
-    "build": "yarn build:vue"
+    "build": "yarn build:vue",
+	"prepare": "yarn build"
   },
   "main": "dist/VueFlowy.common.js",
   "types": "types/main.d.ts",
