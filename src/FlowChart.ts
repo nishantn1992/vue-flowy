@@ -5,6 +5,7 @@ import {select} from 'd3'
 
 export interface FlowChartElementOptions {
   label?: string
+  shape?: string
 }
 
 export interface FlowChartOptions {
@@ -65,7 +66,7 @@ export class FlowChart {
 
 	  // @nishantn -> code to support shape option which will give support for shapes{'rect' ,'circle', 'ellipse', 'diamond'}
 	  if (el.options && el.options.shape) {
-		  elData.shape = el.options.shape;
+		  elData.shape = el.options.shape
 	  }
 
       g.setNode(el.id, elData)
@@ -107,8 +108,9 @@ export class FlowChart {
 
 		// @nishantn-> add image element to support plus icon with all shapes(nodes)
 		// x is -8 because we have kept the image width as 16 so center will be placed at 0
-		let yCord = (this.getBBox() && this.getBBox().y)? this.getBBox().y/2 : 10
-		d3Node.append('image').attr('x', -8).attr('y', -yCord).attr('xlink:href', 'http://worbix.contata.co.in/img/arrow-prev.png');
+		const bBoxAttr = (d3Node.node() as SVGGraphicsElement).getBBox()
+		let yCord = (bBoxAttr && bBoxAttr.y) ? bBoxAttr.y/2 : 10
+		d3Node.append('image').attr('x', -8).attr('y', -yCord).attr('xlink:href', 'https://worbix.contata.co.in/img/plus_in_circle.png')
 
 		// now loop all listeners
         for (const listener of el.listeners) {
