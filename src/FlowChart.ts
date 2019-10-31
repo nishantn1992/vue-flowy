@@ -109,8 +109,22 @@ export class FlowChart {
 		// @nishantn-> add image element to support plus icon with all shapes(nodes)
 		// x is -8 because we have kept the image width as 16 so center will be placed at 0
 		const bBoxAttr = (d3Node.node() as SVGGraphicsElement).getBBox()
+		let nodeClassList = (d3Node.node() as SVGGraphicsElement).classList
+		let nodeId = (v as string)
 		let yCord = (bBoxAttr && bBoxAttr.y) ? bBoxAttr.y/2 : 10
 		d3Node.append('image').attr('x', -8).attr('y', -yCord).attr('xlink:href', 'https://worbix.contata.co.in/img/plus_in_circle.png')
+
+        if(nodeId.indexOf('Start') > -1){
+          nodeClassList.add('node-start');
+        }else if(nodeId.indexOf('action') > -1){
+          nodeClassList.add('node-action')
+        }else if(nodeId.indexOf('rule') > -1){
+          nodeClassList.add('node-rule')
+        }else if(nodeId.indexOf('wait') > -1){
+          nodeClassList.add('node-wait')
+        }else if(nodeId.indexOf('cond') > -1){
+          nodeClassList.add('node-cond')
+        }
 
 		// now loop all listeners
         for (const listener of el.listeners) {
